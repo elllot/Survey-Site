@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+<style type="text/css">
+
+body {
+	background-color: #003366;
+}
+
+.divzies{
+	text-align:center;
+	background-color: #003366;
+}
+
+.bg-primary{
+	font-size: 30px;
+	background-color: #003366;
+}
+
+</style>
+
+<title> Patient Sign-Up </title>
+</head>
+
+<body>
+
+
+
+<div class="divzies">
+
+<p class="bg-primary">Welcome To The Patient Sign-Up Page!</p><br><br>
+
+<button id="home" class="btn btn-warning">Home</button><br><br><br><br>
+
+<p style="color:#ffffff">Enter patient first name:</p>
+<input type="text" class="form-controlz" name="patientFirst" id="first" placeholder="Enter First Name"/><br><br><br>
+<p style="color:#ffffff">Enter patient last name:</p>
+<input type="text" class="form-controlz" name="patientLast" id="last" placeholder="Enter Last Name"/><br><br><br><br><br>
+
+<button id="submit" class="btn btn-success">Sign-Up</button>
+
+</div>
+
+<script type="text/javascript">
+
+var therapistId = sessionStorage.getItem("id");
+
+document.getElementById("submit").addEventListener("click", function() {
+	var first = document.getElementById("first").value;
+	var last = document.getElementById("last").value;
+	if (!first || !last) {
+		alert("Must Enter Both First and Last Names!");
+	}
+	else {
+		var dataString = "first=" + encodeURIComponent(first) + "&last=" + encodeURIComponent(last) + "&id=" + encodeURIComponent(therapistId);
+	    var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open("POST", "patientsignup.php", true);
+
+	    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xmlHttp.addEventListener("load", sub, false);
+	    xmlHttp.send(dataString);
+	}
+}, false);
+
+function sub(event) {
+	alert(event.target.responseText);
+	var data = JSON.parse(event.target.responseText);
+	var success = data.success;
+	var patientId = data.pId;
+	var f = data.first;
+	var l = data.last;
+
+	if (success) {
+		alert("Patient Registration Succesful. Patient Id for " + f + " " + l + " is " + patientId);
+		window.location.replace("therapist1.html");
+	}
+	else {
+		alert("Something Went Wrong... Try Again")
+	}
+}
+
+document.getElmentById("home").addEventListener("click" function() {
+	window.location.replace("therapist1.html");
+}, false);
+
+
+
+
+</script>
+
+</body>
+
+</html>

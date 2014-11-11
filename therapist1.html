@@ -1,0 +1,132 @@
+
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+<style type="text/css">
+body {
+	background-color: #003366;
+}
+.divzies{
+	text-align:center;
+	background-color: #003366;
+}
+.bg-primary{
+	font-size: 30px;
+	background-color: #003366;
+
+}
+</style>
+<title>Home</title>
+</head>
+
+
+<body>
+
+<p class="bg-primary text-center" style="font-weight:bold">Welcome to the PHQ-9 survey database. Sign-In to Continue.</p><br><br><br><br>
+
+&nbsp<p class="text-center" style="color:#ffffff">Enter Username:</p>
+
+<input type='text' class="form-controlz" name='username' id='user' placeholder='Username'/><br><br>
+
+&nbsp<p class="text-center" style="color:#ffffff">Enter Password:</p>
+<input type='password' class="form-controlz" name='password' id='pwd' placeholder="Password"/><br><br><br><br><br>
+<div class="divzies">
+<button id="submit" class="btn btn-successz" type="button">Sign-In</button><br><br>
+
+<button id="register" class="btn btn-warningz" type="button">Register Here</button>
+</div>
+<script type="text/javascript">
+
+if (sessionStorage.getItem("register") == "yes") {
+	alert("Register Successful. Proceed with Logging In");
+	sessionStorage.setItem("register", "");
+}
+if (sessionStorage.getItem("id")){
+	var id= sessionStorage.getItem("id");
+	var user= sessionStorage.getItem("user");
+	reload(user, id);
+}
+
+
+document.getElementById("submit").addEventListener("click", function(){
+	var username = document.getElementById("user").value;
+	var pass = document.getElementById("pwd").value;
+	var dataString = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(pass);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", "therapistlogin.php", true);
+
+    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlHttp.addEventListener("load", log, false);
+    xmlHttp.send(dataString);
+}, false);
+
+function log(event) {
+	alert(event.target.responseText);	
+var data = JSON.parse(event.target.responseText);
+	var therapistId = data.tId;
+	var user = data.username;
+	var success = data.success;
+	if (success) {
+		reload(user, therapistId);
+	}
+	else {
+		alert("Login Failure. Please Try Again");
+		location.reload();	
+}
+}
+
+function reload(user, id) {
+	//document.write("<label> Welcome " + user + "</label>")
+	
+	//document.write("<form>");
+	document.getElementsByTagName("body")[0].removeChild(document.getElementsByTagName("body")[0].childNodes[0]);
+//document.write("<label> Welcome " +user+ "</label><br><br>");
+	document.getElementsByTagName("body")[0].removeChild(document.getElementsByTagName("body")[0].childNodes[0]);
+	document.getElementsByTagName("body")[0].removeChild(document.getElementsByTagName("body")[0].childNodes[0]);
+
+
+	document.write("<p class=''>Welcome " +user+ "</p><br><br>");
+
+	document.write("<button id= 'sign' type= 'button' class='signup'>Sign Up a Patient</button>");
+	document.write("<button id= 'list' type= 'button' class='lists'>Patient Graphs</button>");
+	document.write("<button id= 'survey' type ='button' class='surveys'>Survey</button>");
+	//document.write("<button id= 'search' type='button' class='search'>Forgot patient id?</button>");
+		
+
+	
+
+	//document.write("</form>");
+	document.getElementById("sign").addEventListener("click", function(){ 
+		sessionStorage.setItem("user", user);
+		sessionStorage.setItem("id", id);
+		window.location.replace("patientsignup.html");
+	}, false);
+
+	document.getElementById("list").addEventListener("click", function() {
+		sessionStorage.setItem("user", user);
+		sessionStorage.setItem("id", id);
+		window.location.replace("list.html");
+	}, false);
+	document.getElementById("survey").addEventListener("click", function() {
+		sessionStorage.setItem("user", user);
+		sessionStorage.setItem("id", id);
+		window.location.replace("psych2.html");
+	}, false);
+	
+}
+
+document.getElementById("register").addEventListener("click", function() {
+                window.location.replace("therapistsignup2.html");
+        }, false);
+
+
+
+
+	
+
+</script>
+
+
+</body>
+</html>

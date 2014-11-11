@@ -1,0 +1,139 @@
+
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+<style type="text/css">
+
+body {
+	background-color: #003366;
+}
+
+.divzies{
+	text-align:center;
+	background-color: #003366;
+}
+
+.bg-primary{
+	font-size: 30px;
+	background-color: #003366;
+}
+
+</style>
+
+<title> Therapist Sign-Up Page </title>
+</head>
+
+<body>
+
+
+<p class="bg-primary text-center" style="font-weight:bold">Welcome To The Therapist Register Page!</p><br><br><br><br>
+
+<div class="divzies">
+<p style="color:#ffffff">Enter First Name:</p>
+<input type='text' class="form-controlz" name='firstName' id='first' placeholder='First Name'/><br><br><br>
+
+<p style="color:#ffffff">Enter Last Name:</p>
+<input type='text' class="form-controlz" name='lastName' id='last' placeholder='Last Name'/><br><br><br>
+
+<p style="color:#ffffff">Desired Username:</p>
+<input type='text' class="form-controlz" name='username' id='user' placeholder='Username'/><br><br><br>
+
+<p style="color:#ffffff">Desired Password:</p>
+<input type='password' class="form-controlz" name='password' id='pwd' placeholder='Password'/><br><br><br>
+
+<p style="color:#ffffff">Re-Enter Password:</p>
+<input type='password' class="form-controlz" name='password' id='pwdre' placeholder='Password'/><br><br><br><br><br>
+
+<button id='regis' class="btn btn-success" type='button' class='register'>Register</button>
+
+</div>
+<script type="text/javascript">
+
+document.getElementById("regis").addEventListener("click", function() {
+	var firstName = document.getElementById("first").value;
+	var lastName = document.getElementById("last").value;
+	var username = document.getElementById("user").value;
+	var pass = document.getElementById("pwd").value;
+	if (!firstName || !lastName || !username || !pass) {
+		alert("Must Fill in All Fields!")
+	}
+	else {
+		var dataString = "firstname=" + encodeURIComponent(firstName) + "&lastname=" + encodeURIComponent(lastName) + "&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(pass);
+	    var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open("POST", "therapistsignup.php", true);
+
+	    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xmlHttp.addEventListener("load", reg, false);
+    	xmlHttp.send(dataString);
+	}
+}, false)
+
+function reg(event) {
+	alert(event.target.responseText);
+	var data = JSON.parse(event.target.responseText);
+	var success = data.success;
+
+	if (success) {
+	alert("here");	
+	sessionStorage.setItem("register", "yes");
+		window.location.replace("therapist1.html");
+	}
+	else {
+		alert("Sign-Up Failure. Please Try Again");
+	}
+}
+
+document.getElementById("user").addEventListener("onkeyup", function(){
+	var username = document.getElementById("user").value;
+	if (!username) {
+		
+	    alert("Must Enter a Username!");
+	}
+	else {
+		var dataString = "username=" + encodeURIComponent(username);
+		var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open("POST", "psychcheck.php", true);
+		alert("he");
+	    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xmlHttp.addEventListener("load", check, false);
+    	xmlHttp.send(dataString);
+		
+	}
+}, false)
+
+function check(event) {
+	alert(event.target.responseText);
+	var data = JSON.parse(event.target.responseText);
+	var available = data.success;
+
+	if (available) {
+		alert("Username Available. Please Proceed");
+		var a = document.getElementById("user");
+		a.setAttribute("class", "form-control has-success");
+	}
+
+	else {
+		alert("Username Taken. Try a Different Username");
+		a.setAttribute("class", "form-control has-error");
+	}
+}
+
+
+document.getElementById("pwdre").addEventListener("onkeyup", function(){
+	var pass = document.getElementById("pwd").value;
+	var re = document.getElementById("pwdre").value;
+
+	if (pass == re) {
+		document.getElementById("pwdre").setAttribute("class", "form-control has-success");
+	}
+	else {
+		document.getElementById("pwdre").setAttribute("class", "form-control has-error");
+	}
+}, false);
+
+
+</script>
+
+</body>
+</html>

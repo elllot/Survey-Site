@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML>
+	<HTML>
+	<head>
+
+	<link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+	<title>
+	PHQ-9
+	</title>
+	</head>
+	<body> 
+	<br>
+    <button id="back" type="button" class="btn btn-warning">Home</button><br><br>
+
+	&nbspEnter Your Patient ID:<br>
+	<Input type =text id='patientId' class="form-control" name=ID placeholder="Patient ID"/><br>
+	&nbspEnter The Session #:<br>
+	<Input type =text id='session' class="form-control" name=Session placeholder="Session #"/><br><br>
+
+	<p class="bg-warning">Instructions: Over the last 2 PAST WEEKS, INCLUDING TODAY, how often have you been bothered by of following problems.</p><br>
+	
+	
+	
+	<p class="bg-primary">1. Little intrest or pleasure in doing things.</p>
+		<INPUT type =radio name="one" value=0> Not at all <br>
+		<INPUT type =radio name="one" value=1> Several days<br>
+		<INPUT type =radio name="one" value=2> More than half the days<br>
+		<INPUT type =radio name="one" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">2. Feeling down, depressed, or hopeless.</p>
+		<INPUT type =radio name="two" value=0> Not at all <br>
+		<INPUT type =radio name="two" value=1> Several days<br>
+		<INPUT type =radio name="two" value=2> More than half the days<br>
+		<INPUT type =radio name="two" value=3> Nearly every day <br><br><br>
+	
+	<p class="bg-primary">3. Trouble falling or staying asleep, or sleeping too much.</p>
+		<INPUT type =radio name="three" value=0> Not at all <br>
+		<INPUT type =radio name="three" value=1> Several days<br>
+		<INPUT type =radio name="three" value=2> More than half the days<br>
+		<INPUT type =radio name="three" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">4. Feeling tired or having little energy.</p>
+		<INPUT type =radio name="four" value=0> Not at all <br>
+		<INPUT type =radio name="four" value=1> Several days<br>
+		<INPUT type =radio name="four" value=2> More than half the days<br>
+		<INPUT type =radio name="four" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">5. Poor appetite or overeating.</p>
+		<INPUT type =radio name="five" value=0> Not at all <br>
+		<INPUT type =radio name="five" value=1> Several days<br>
+		<INPUT type =radio name="five" value=2> More than half the days<br>
+		<INPUT type =radio name="five" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">6. Feeling bad about yourself, or that you are a failure, or that you have let yourself or your family down.</p>
+		<INPUT type =radio name="six" value=0> Not at all <br>
+		<INPUT type =radio name="six" value=1> Several days<br>
+		<INPUT type =radio name="six" value=2> More than half the days<br>
+		<INPUT type =radio name="six" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">7. Trouble concentrating on things, such as reading the newspaper or watching television.</p>
+		<INPUT type =radio name="seven" value=0> Not at all <br>
+		<INPUT type =radio name="seven" value=1> Several days<br>
+		<INPUT type =radio name="seven" value=2> More than half the days<br>
+		<INPUT type =radio name="seven" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">8. Moving or speaking so slowly that other people have noticed. OR the opposite- being so fidgety or restless that you have been moving around a lot more than usual.</p>
+	
+		<INPUT type =radio name="eight" value=0> Not at all <br>
+		<INPUT type =radio name="eight" value=1> Several days<br>
+		<INPUT type =radio name="eight" value=2> More than half the days<br>
+		<INPUT type =radio name="eight" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">9. Thoughts that you would e better off dead, or of hurting yourself in some way.</p> 
+		
+		<INPUT type =radio name="nine" value=0> Not at all <br>
+		<INPUT type =radio name="nine" value=1> Several days<br>
+		<INPUT type =radio name="nine" value=2> More than half the days<br>
+		<INPUT type =radio name="nine" value=3> Nearly every day <br><br><br>
+	<p class="bg-primary">10. If you checked off any of the problems listed in items    
+      1-9 above, how difficult have these problems made it      
+      for you to do your work, take care of things at home,       
+      or get along with other people?</p>     
+		<INPUT type =radio name="ten" value=0> Not difficult at all <br>
+		<INPUT type =radio name="ten" value=1> Somewhat difficult<br>
+		<INPUT type =radio name="ten" value=2> Very difficult<br>
+		<INPUT type =radio name="ten" value=3> Extremely difficult <br><br><br>	
+
+		<button id= "submit" type="button" class="btn btn-success">Submit</button>
+				
+
+	<script type="text/javascript">
+	var one = 0;
+	var two = 0;
+	var three = 0;
+	var four = 0;
+	var five = 0;
+	var six = 0;
+	var seven = 0;
+	var eight = 0;
+	var nine = 0;
+	var ten = 0;
+	var checked = 0;
+
+document.getElementById("submit").addEventListener("click", function() {
+		// var total = 0;
+		// var questionArray = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
+		// for (var j = 0, length = questionArray.length; j < length; j++){
+		// 	var radios = document.getElementsByName(questionArray[j]);
+		// 	for (var i = 0, length = radios.length; i < length; i++) {
+		// 	    if (radios[i].checked) {
+		// 	    	total = parseFloat(total) + parseFloat(radios[i].value);
+		//     	}
+		// 	}
+		// }
+		// alert(total);
+		// var a = document.getElementsByName("one")[0].value;
+		// alert(document.getElementsByName("one")[0].value);
+		var radios = document.getElementsByName('one');
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        one = radios[i].value;
+		        checked++;
+		        break;
+			}
+		}
+			
+		radios = document.getElementsByName('two');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        two = radios[i].value;
+		        checked++;
+		        break;
+				}
+		}
+		
+		radios = document.getElementsByName('three');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        three = radios[i].value;
+		        checked++;
+		        break;
+		        }
+		}
+		
+		radios = document.getElementsByName('four');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        four = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('five');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        five = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('six');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        six = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('seven');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        seven = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('eight');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        eight = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('nine');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        nine = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+		
+		radios = document.getElementsByName('ten');	
+		for (var i = 0, length = radios.length; i < length; i++) {
+			    if (radios[i].checked) {
+		        ten = radios[i].value;
+		        checked++;
+		        break;
+		    }
+		}
+
+		var patientId = document.getElementById("patientId").value;
+		var sessionId = document.getElementById("session").value;
+
+		if (!patientId || sessionId) {
+			alert("Must Enter Both PatientID and Session #");
+		else{
+			if (checked == 10) {
+				
+				var total = parseInt(one) + parseInt(two) + parseInt(three) + parseInt(four) + parseInt(five) + parseInt(six) + parseInt(seven) + parseInt(eight) + parseInt(nine) + parseInt(ten);
+				var dataString = "total=" + encodeURIComponent(total) + "&one=" + encodeURIComponent(one) + "&two=" + encodeURIComponent(two) + "&three=" + encodeURIComponent(three) + "&four=" + encodeURIComponent(four) + "&five=" + encodeURIComponent(five) + "&six=" + encodeURIComponent(six) + "&seven=" + encodeURIComponent(seven) + "&eight=" + encodeURIComponent(eight) + "&nine=" + encodeURIComponent(nine) + "&ten=" + encodeURIComponent(ten) + "&pId=" + encodeURIComponent(patientId) + "&sId=" + encodeURIComponent(sessionId);
+			    var xmlHttp = new XMLHttpRequest();
+			    xmlHttp.open("POST", "survey.php", true);
+
+			    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			    xmlHttp.addEventListener("load", response, false);
+			    xmlHttp.send(dataString);
+			}
+			else {
+				alert("Some Questions Were Not Marked!");
+				checked = 0;
+
+			}
+		}
+	}, false)
+
+	
+	function response(event) {
+		var data = JSON.parse(event.target.responseText);
+		var success = data.success;
+		if (success) {
+			alert("Submission Successful");
+			window.location.replace("therapist.html");
+		}
+		else{
+			alert("Submission Failure. Please Try Again");
+		}
+	}
+	
+	document.getElementById("back").addEventListener("click", function(){
+		window.location.replace("therapist1.html");
+	}, false);
+
+
+	</script>
+
+
+	</body>
+	</html>
+	
+	
+		
